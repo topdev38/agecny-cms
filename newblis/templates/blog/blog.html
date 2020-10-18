@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+        {% include 'banner.html' %}
+    
+        <!-- Blog Section -->
+        <section class="blog-section">
+            <div class="auto-container">
+                <div class="row">
+                    {% for post in posts %}
+                        {% image post.blog_image fill-570x215 as blog_image %}
+                        <!-- News Block -->
+                        <div class="news-block-two col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-box">
+                                <div class="image-box">
+                                    <figure class="image"><img src="{{blog_image.url}}" alt=""></figure>
+                                    <div class="overlay-box"><a href="{{post.url}}"><i class="fa fa-link"></i></a></div>
+                                </div>
+                                <div class="caption-box">
+                                    <div class="inner">
+                                        <h3><a href="{{post.url}}">{{post.title}}</a></h3>
+                                        <ul class="info">
+                                            <li>{{post.post_date|date:"M d Y"}},</li>
+                                            <li>{{post.author}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>    
+                <!--Post Share Options-->
+                <div class="styled-pagination">
+                    <ul class="clearfix">
+                        {% if posts.has_previous %}
+                            <li class="prev-post"><a href="?page={{ posts.previous_page_number }}"><span class="fa fa-long-arrow-left"></span> Prev</a></li>
+                        {% endif %}
+                        {% for page_num in posts.paginator.page_range %}
+                            <li {% if page_num == posts.number %} class="active" {% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                        {% endfor %}
+                        {% if posts.has_next %}
+                            <li class="next-post"><a href="?page={{ posts.next_page_number }}"> Next <span class="fa fa-long-arrow-right"></span> </a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+        <!--End Blog Section -->
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+    {% include 'banner.html' %}
+
+    <!--Sidebar Page Container-->
+    <div class="sidebar-page-container">
+        <div class="auto-container">
+            <div class="row clearfix">
+                <!--Sidebar Side-->
+                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
+                    <aside class="sidebar services-sidebar">
+                        <!--Brochure-->
+                        <div class="sidebar-widget brochure-widget">
+                            <h3 class="sidebar-title">Download Brochures</h3>
+                            {% for brochure in page.brochure %}
+                                <div class="brochure-box">
+                                    <div class="inner">
+                                        <span class="icon fa fa-file-{{brochure.value.brochure_type}}-o"></span>
+                                        <div class="text">{{brochure.value.title}} .{{brochure.value.brochure_type}}</div>
+                                    </div>
+                                    <a href="{{brochure.value.get_link.url}}" target="_blank" class="overlay-link"></a>
+                                </div>
+                            {% endfor %}                            
+                        </div>
+                    </aside>
+                </div>
+                
+                <!--Content Side-->
+                <div class="content-side col-lg-8 col-md-12 col-sm-12">
+                    <div class="service-detail">
+                        <div class="inner-box">
+                            <div class="image-box">
+                                <div class="single-item-carousel owl-carousel owl-theme">
+                                    {% for img_slide in page.image_slider %}
+                                        {% image img_slide.value.img fill-770x450 as img_slider %}
+                                        <figure class="image"><img src="{{img_slider.url}}" alt="" /></figure>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <h2>Commercial Design</h2>
+                            {{page.text | safe}}
+                            {% for quote in page.quotes %}
+                                <blockquote>{{quote.value.quote}}<cite>{{quote.value.author_name}}</cite></blockquote>
+                            {% endfor %}
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

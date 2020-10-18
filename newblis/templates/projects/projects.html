@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+    {% include 'banner.html' %}
+
+    <!-- Projects Section -->
+    <section class="projects-section alternate">
+        <div class="auto-container">
+             <!--MixitUp Galery-->
+            <div class="mixitup-gallery">
+                <div class="filter-list row">
+                    {% for project in projects %}
+                        <!-- Project Block -->
+                        <div class="project-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="image-box">
+                                {% with project.images|first as first_img %}
+                                    {% image first_img.value.img fill-370x490 as img %}
+                                    <figure class="image"><img src="{{img.url}}" alt=""></figure>
+                                {% endwith %}
+                                <div class="overlay-box">
+                                    <h4><a href="{{project.url}}">{{project.title}}<br>Project</a></h4>
+                                    <div class="btn-box">
+                                        {% with project.images|first as first_img %}
+                                            {% image first_img.value.img fill-970x560 as img %}
+                                            <a href="{{img.url}}" class="lightbox-image" data-fancybox="gallery"><i class="fa fa-search"></i></a>
+                                        {% endwith %}
+                                        <a href="{{project.url}}"><i class="fa fa-external-link"></i></a>
+                                    </div>
+                                    <span class="tag">WEB DEVELOPMENT</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

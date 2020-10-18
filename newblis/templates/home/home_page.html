@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+    <!-- Bnner Section -->
+    <section class="banner-section-two">
+        <div class="banner-carousel owl-carousel owl-theme">
+            {% for banner_slide in page.banner %}
+                {% include_block banner_slide %}
+            {% endfor %}
+        </div>
+    </section>
+    <!-- End Bnner Section -->
+
+    <!-- Specialize Section -->
+    <section class="specialize-section">
+        <div class="auto-container">
+            <div class="sec-title">
+                <span class="float-text">Services</span>
+                <h2>Our Specialization</h2>
+            </div>
+
+            <div class="services-carousel-two owl-carousel owl-theme">
+                {% for service in page.services %}
+                    {% include_block service %}
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- End Specialize Section -->
+
+{% endblock %}

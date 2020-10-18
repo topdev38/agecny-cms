@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}    
+        <!-- Fun Fact And Features -->
+        {% image page.features.counter_background fill-1831x539 as counter_background %}
+        <section class="fun-fact-and-features"  style="background-image: url({{counter_background.url}});">
+            <div class="outer-box">
+                <div class="auto-container">
+                    <!-- Fact Counter -->
+                    <div class="fact-counter">
+                        <div class="row">
+                            {% for counter in page.features.counter %}
+                                {% include_block counter %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="features">
+                        <div class="row">
+                            {% for feature in page.features.feature %}
+                                {% include_block feature %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Fun Fact Section -->
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <span class="float-text">Our Team</span>
+                    <h2>Profect Expert</h2>
+                </div>
+    
+                <div class="row clearfix">
+                    {% for member in page.team.member %}
+                        {% include_block member %}
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!--End Team Section -->
+    
+        {% include 'offer_section.html' %}
+    
+        <!-- Video Section -->
+        <section class="video-section style-two">
+            <div class="outer-box">
+                <div class="auto-container">
+                    <div class="row">
+                        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="sec-title">
+                                    <span class="float-text">See Video</span>
+                                    <h2>Campaign Video</h2>
+                                </div>
+                                <span class="title">We Give You The Best</span>
+                                <div class="text">Present all the speakers and participants in GenesisExpo`s beautiful layouts. Choose your favorite variant of layout and create your own. You can create also single speaker profile with all relevant information.</div> 
+                            </div>
+                        </div>
+    
+                        <!-- Video Column -->
+                        <div class="video-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="video-box">
+                                     <figure class="image"><img src="{% static 'images/resource/video-img.jpg' %}" alt="">
+                                        <a href="https://www.youtube.com/watch?v=Fvae8nxzVz4" class="link" data-fancybox="gallery" data-caption=""><span class="icon fa fa-play"></span></a>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--End Video Section -->
+    
+{% endblock %}

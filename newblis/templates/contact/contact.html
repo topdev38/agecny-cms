@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+{% block content %}
+        {% include 'banner.html' %}
+    
+        <!-- Contact Page Section -->
+        <section class="contact-page-section">
+            <div class="auto-container">
+                <div class="row">
+                    <!-- Form Column -->
+                    <div class="form-column col-lg-7 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <div class="sec-title">
+                                <span class="float-text">informaer</span>
+                                <h2>Contact Us</h2>
+                            </div>
+    
+                            <div class="contact-form">
+                                <form action="{% pageurl page %}" method="POST" id="contact-form">
+                                    <div class="row">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-group col-lg-6 col-md-12 col-sm-12">
+                                                {{field}}
+                                            </div>
+                                        {% endfor %}
+                                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                            <button class="theme-btn btn-style-three" type="submit" name="submit-form">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </section>
+        <!--End Contact Page Section -->
+{% endblock %}
